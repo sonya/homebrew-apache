@@ -1,7 +1,7 @@
 class Httpd24 < Formula
   homepage "https://httpd.apache.org/"
-  url "https://archive.apache.org/dist/httpd/httpd-2.4.16.tar.bz2"
-  sha256 "ac660b47aaa7887779a6430404dcb40c0b04f90ea69e7bd49a40552e9ff13743"
+  url "https://archive.apache.org/dist/httpd/httpd-2.4.17.tar.bz2"
+  sha256 "331e035dec81d3db95b048f036f4d7b1a97ec8daa5b377bde42d4ccf1f2eb798"
 
   bottle do
     sha256 "a7744efed0e6bd8dc4eb6926a0f678593b6f18587dde83dc4a902036601f7eb2" => :yosemite
@@ -21,6 +21,7 @@ class Httpd24 < Formula
   depends_on "openssl"
   depends_on "pcre"
   depends_on "homebrew/dupes/zlib"
+  depends_on "nghttp2"
 
   if build.with? "mpm-worker" and build.with? "mpm-event"
     onoe "Cannot build with both worker and event MPMs, choose one"
@@ -48,6 +49,7 @@ class Httpd24 < Formula
       --enable-cgid
       --enable-suexec
       --enable-rewrite
+      --enable-http2
     ]
 
     args << "--with-apr=#{Formula["apr"].opt_prefix}"
